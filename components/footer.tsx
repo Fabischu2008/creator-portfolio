@@ -70,7 +70,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold">Folge mir</h3>
             <div className="flex gap-3">
               <a
-                href="https://github.com"
+                href="https://github.com/Fabischu2008"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-colors"
@@ -78,7 +78,7 @@ export function Footer() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/fabian-schuck-20a56122b/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-colors"
@@ -94,7 +94,7 @@ export function Footer() {
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="mailto:kontakt@example.com"
+                href="mailto:fabianschuck13@gmail.com"
                 className="p-2 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-colors"
               >
                 <Mail className="h-5 w-5" />

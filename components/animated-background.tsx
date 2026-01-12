@@ -15,6 +15,7 @@ interface Dot {
 export function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isDark, setIsDark] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     // Check for dark mode
@@ -23,6 +24,13 @@ export function AnimatedBackground() {
     }
     checkDarkMode()
 
+    // Check for mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+
     // Watch for dark mode changes
     const observer = new MutationObserver(checkDarkMode)
     observer.observe(document.documentElement, {
@@ -30,7 +38,10 @@ export function AnimatedBackground() {
       attributeFilter: ["class"],
     })
 
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("resize", checkMobile)
+    }
   }, [])
 
   useEffect(() => {
@@ -40,11 +51,11 @@ export function AnimatedBackground() {
     const ctx = canvas.getContext("2d", { alpha: true })
     if (!ctx) return
 
-    // Dot configuration
-    const dotCount = 50
-    const connectionDistance = 280
-    const minRadius = 3
-    const maxRadius = 7
+    // Dot configuration - optimized for mobile
+    const dotCount = isMobile ? 25 : 50
+    const connectionDistance = isMobile ? 220 : 280
+    const minRadius = isMobile ? 2.5 : 3
+    const maxRadius = isMobile ? 5 : 7
     const baseSpeed = 0.7
     const speedVariation = 0.4
     const directionChangeInterval = 180 // frames
@@ -190,7 +201,7 @@ export function AnimatedBackground() {
         cancelAnimationFrame(animationFrameId)
       }
     }
-  }, [isDark])
+  }, [isDark, isMobile])
 
   return (
     <canvas

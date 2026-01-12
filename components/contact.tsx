@@ -40,9 +40,9 @@ export function Contact() {
                 <Mail className="h-6 w-6 text-accent" />
               </div>
               <h3 className="text-xl font-semibold">E-Mail</h3>
-              <p className="text-muted-foreground">kontakt@example.com</p>
-              <Button variant="outline" className="w-full bg-transparent">
-                E-Mail schreiben
+              <p className="text-muted-foreground">fabianschuck13@gmail.com</p>
+              <Button variant="outline" className="w-full bg-transparent" asChild>
+                <a href="mailto:fabianschuck13@gmail.com">E-Mail schreiben</a>
               </Button>
             </Card>
 
