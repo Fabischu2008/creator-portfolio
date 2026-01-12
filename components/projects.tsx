@@ -6,7 +6,7 @@ import Image from "next/image"
 export function Projects() {
   const projects = [
     {
-      title: "Xcoin - Privacy Cryptocurrency",
+      title: "Next Gen Website",
       description:
         "Next-generation privacy cryptocurrency website mit futuristischem Design. Features Quantum-Safe Security, DAO-Governance und vollständige Transaktions-Anonymität. Dark-Theme mit immersiven 3D-Cityscape-Background.",
       image: "/images/screenshot-202026-01-12-20at-2014.png",
