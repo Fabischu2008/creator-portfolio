@@ -1,12 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isOnKalkulatorPage = pathname === "/kalkulator"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,10 +21,25 @@ export function Header() {
   }, [])
 
   const scrollToSection = (id: string) => {
+    if (isOnKalkulatorPage) {
+      // Wenn wir auf der Kalkulator-Seite sind, zur Hauptseite navigieren
+      window.location.href = `/#${id}`
+      setIsMobileMenuOpen(false)
+      return
+    }
+    
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
       setIsMobileMenuOpen(false)
+    }
+  }
+
+  const handleLogoClick = () => {
+    if (isOnKalkulatorPage) {
+      window.location.href = "/"
+    } else {
+      scrollToSection("hero")
     }
   }
 
@@ -33,7 +52,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <button
-            onClick={() => scrollToSection("hero")}
+            onClick={handleLogoClick}
             className="text-lg md:text-xl font-semibold text-foreground hover:text-accent transition-colors"
           >
             Portfolio
@@ -59,9 +78,23 @@ export function Header() {
             >
               Projekte
             </button>
-            <Button onClick={() => scrollToSection("contact")} size="sm">
+            <a
+              href="/kalkulator"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Kostenrechner
+            </a>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
               Kontakt
-            </Button>
+            </button>
+            <a href="/kalkulator">
+              <Button size="lg" className="font-semibold">
+                Kostenrechner starten
+              </Button>
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -91,9 +124,24 @@ export function Header() {
             >
               Projekte
             </button>
-            <Button onClick={() => scrollToSection("contact")} className="w-full">
+            <a
+              href="/kalkulator"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block w-full text-left py-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Kostenrechner
+            </a>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="block w-full text-left py-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
               Kontakt
-            </Button>
+            </button>
+            <a href="/kalkulator" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button className="w-full" size="lg">
+                Kostenrechner starten
+              </Button>
+            </a>
           </nav>
         )}
       </div>
