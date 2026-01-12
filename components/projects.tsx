@@ -28,8 +28,8 @@ export function Projects() {
       description: "Umfassendes Analytics-Dashboard mit Echtzeit-Datenvisualisierung und benutzerdefinierten Reports.",
       image: "/analytics-dashboard.png",
       tags: ["TypeScript", "React", "D3.js", "Node.js"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://saas-dashboard-prototyp.vercel.app/",
+      githubUrl: "https://github.com/Fabischu2008/saas-dashboard-prototyp",
     },
     {
       title: "Mobile App Design",
