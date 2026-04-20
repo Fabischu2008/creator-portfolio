@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -78,23 +78,18 @@ export function Header() {
             >
               Projekte
             </button>
-            <a
-              href="/kalkulator"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Kostenrechner
-            </a>
             <button
               onClick={() => scrollToSection("contact")}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Kontakt
             </button>
-            <a href="/kalkulator">
-              <Button size="lg" className="font-semibold">
+            <Link href="/kalkulator">
+              <Button size="lg" className="font-semibold group">
                 Kostenrechner starten
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -138,27 +133,28 @@ export function Header() {
                   onClick={() => scrollToSection("projects")}
                   className="block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-accent/50 hover:text-accent-foreground transition-all duration-200"
                 >
-                  Projekte
+                  {t("nav.projects")}
                 </button>
-                <a
-                  href="/kalkulator"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-accent/50 hover:text-accent-foreground transition-all duration-200"
-                >
-                  Kostenrechner
-                </a>
                 <button
                   onClick={() => scrollToSection("contact")}
                   className="block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-accent/50 hover:text-accent-foreground transition-all duration-200"
                 >
-                  Kontakt
+                  {t("nav.contact")}
                 </button>
-                <div className="pt-2 mt-2 border-t border-border">
-                  <a href="/kalkulator" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button className="w-full" size="lg">
-                      Kostenrechner starten
+                <div className="pt-2 mt-2 border-t border-border space-y-2">
+                  <Link href="/kalkulator" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button className="w-full group" size="lg">
+                      {t("nav.calculatorStart")}
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
-                  </a>
+                  </Link>
+                  <button
+                    onClick={toggleLanguage}
+                    className="w-full px-4 py-3 rounded-lg text-base font-medium border border-border hover:bg-accent/50 transition-all duration-200 flex items-center justify-center gap-2"
+                  >
+                    <Globe className="h-4 w-4" />
+                    {language === "de" ? "EN" : "DE"}
+                  </button>
                 </div>
               </div>
             </nav>

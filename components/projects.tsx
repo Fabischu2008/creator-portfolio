@@ -8,36 +8,37 @@ export function Projects() {
     {
       title: "Next Gen Website",
       description:
-        "Next-generation privacy cryptocurrency website mit futuristischem Design. Features Quantum-Safe Security, DAO-Governance und vollständige Transaktions-Anonymität. Dark-Theme mit immersiven 3D-Cityscape-Background.",
+        "Next-generation privacy cryptocurrency website with futuristic design. Features Quantum-Safe Security, DAO-Governance and complete transaction anonymity. Dark theme with immersive 3D cityscape background.",
       image: "/images/screenshot-202026-01-12-20at-2014.png",
       tags: ["Next.js", "TypeScript", "Web3", "Framer Motion"],
       liveUrl: "https://xcoin-website.vercel.app/",
       githubUrl: "https://github.com/Fabischu2008/Xcoin_Website",
     },
     {
-      title: "E-Commerce Platform",
+      title: "Leben in Saarbrücken",
       description:
-        "Moderne Online-Shopping-Plattform mit intuitivem Checkout-Prozess und personalisierten Produktempfehlungen.",
-      image: "/modern-ecommerce-website.png",
-      tags: ["React", "Next.js", "Stripe", "PostgreSQL"],
-      liveUrl: "#",
-      githubUrl: "#",
+        "Ein Guide für das urbane Leben in Saarbrücken – Kultur, Karriere und Lebensqualität in einer Stadt. Moderne Website mit Fokus auf Studierende, Akademiker:innen und kreative Köpfe.",
+      image: "/images/saarbruecken.png",
+      tags: ["Next.js", "TypeScript", "Web Design"],
+      liveUrl: "https://lebeninsaarbruecken.de/",
+      githubUrl: null,
     },
     {
       title: "SaaS Dashboard",
-      description: "Umfassendes Analytics-Dashboard mit Echtzeit-Datenvisualisierung und benutzerdefinierten Reports.",
+      description: "Comprehensive analytics dashboard with real-time data visualization and custom reports.",
       image: "/analytics-dashboard.png",
       tags: ["TypeScript", "React", "D3.js", "Node.js"],
       liveUrl: "https://saas-dashboard-prototyp.vercel.app/",
       githubUrl: "https://github.com/Fabischu2008/saas-dashboard-prototyp",
     },
     {
-      title: "Mobile App Design",
-      description: "Fitness-Tracking-App mit ansprechenden Animationen und gamifizierter User Experience.",
-      image: "/fitness-mobile-app-ui-design.jpg",
-      tags: ["Figma", "React Native", "Firebase"],
-      liveUrl: "#",
-      githubUrl: "#",
+      title: "zeichendesuniversums.com",
+      description:
+        "Landingpage fuer einen Sternzeichen-Guide mit klarem Fokus auf Conversion, starker visueller Markenwelt und direktem PDF-Lead-Magnet.",
+      image: "/images/zeichendesuniversums-preview.png",
+      tags: ["Next.js", "TypeScript", "Landingpage"],
+      liveUrl: "https://zeichendesuniversums.com",
+      githubUrl: null,
     },
   ]
 
@@ -77,15 +78,17 @@ export function Projects() {
                     <Button variant="default" size="sm" className="group/btn" asChild>
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="mr-2 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                        Live Demo
+                        Live ansehen
                       </a>
                     </Button>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="mr-2 h-4 w-4" />
-                        Code
-                      </a>
-                    </Button>
+                    {project.githubUrl && project.githubUrl !== "#" && (
+                      <Button variant="outline" size="sm" asChild>
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                          <Github className="mr-2 h-4 w-4" />
+                          Code ansehen
+                        </a>
+                      </Button>
+                    )}
                   </div>
                 </div>
               </Card>

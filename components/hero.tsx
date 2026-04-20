@@ -24,7 +24,7 @@ export function Hero() {
           <div className="space-y-4">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-balance">
               UX/UI Designer &<br />
-              Software­entwickler
+              Softwareentwickler
             </h1>
             <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground max-w-3xl text-pretty">
               Ich entwickle durchdachte digitale Erlebnisse, die Design und Code vereinen
