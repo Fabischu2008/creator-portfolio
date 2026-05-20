@@ -133,28 +133,21 @@ export function Header() {
                   onClick={() => scrollToSection("projects")}
                   className="block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-accent/50 hover:text-accent-foreground transition-all duration-200"
                 >
-                  {t("nav.projects")}
+                  Projekte
                 </button>
                 <button
                   onClick={() => scrollToSection("contact")}
                   className="block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-accent/50 hover:text-accent-foreground transition-all duration-200"
                 >
-                  {t("nav.contact")}
+                  Kontakt
                 </button>
-                <div className="pt-2 mt-2 border-t border-border space-y-2">
+                <div className="pt-2 mt-2 border-t border-border">
                   <Link href="/kalkulator" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button className="w-full group" size="lg">
-                      {t("nav.calculatorStart")}
+                      Kostenrechner starten
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
                   </Link>
-                  <button
-                    onClick={toggleLanguage}
-                    className="w-full px-4 py-3 rounded-lg text-base font-medium border border-border hover:bg-accent/50 transition-all duration-200 flex items-center justify-center gap-2"
-                  >
-                    <Globe className="h-4 w-4" />
-                    {language === "de" ? "EN" : "DE"}
-                  </button>
                 </div>
               </div>
             </nav>
