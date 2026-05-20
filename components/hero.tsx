@@ -22,7 +22,10 @@ export function Hero() {
       <div className="max-w-5xl w-full relative z-10">
         <div className="space-y-8 text-center md:text-left">
           <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-balance">
+            <h1
+              lang="de"
+              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-balance hyphens-auto break-words"
+            >
               UX/UI Designer &<br />
               Softwareentwickler
             </h1>
