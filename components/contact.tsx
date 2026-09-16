@@ -1,20 +1,24 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Card } from "@/components/ui/card"
-import { Mail, MessageSquare, Send } from "lucide-react"
+import { ArrowRight, Mail, MessageCircle, Send } from "lucide-react"
+import { SectionLabel } from "@/components/section-label"
+import { Reveal } from "@/components/reveal"
+import { CONTACT_EMAIL, DEFAULT_WHATSAPP_MESSAGE, whatsappUrl } from "@/lib/contact"
+
+const bullets = [
+  "Eine ehrliche Einschätzung, was dein Auftritt gerade bremst.",
+  "Ein konkreter Vorschlag, welcher Kanal für dich Sinn macht.",
+  "Ein erster Schritt, den du sofort gehen kannst.",
+]
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState("")
@@ -27,28 +31,16 @@ export function Contact() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          type: "contact",
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, type: "contact" }),
       })
 
       const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Ein Fehler ist aufgetreten")
-      }
+      if (!response.ok) throw new Error(data.error || "Ein Fehler ist aufgetreten")
 
       setIsSubmitted(true)
       setFormData({ name: "", email: "", message: "" })
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false)
-      }, 5000)
+      setTimeout(() => setIsSubmitted(false), 5000)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Ein Fehler ist aufgetreten")
     } finally {
@@ -58,55 +50,74 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="space-y-12">
-          <div className="space-y-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Lass uns zusammenarbeiten</h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              Hast du ein Projekt im Kopf? Ich freue mich darauf, von dir zu hören und gemeinsam etwas Großartiges zu
-              schaffen.
-            </p>
-          </div>
+      <div className="max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <Reveal>
+            <div className="space-y-6">
+              <SectionLabel>Kontakt</SectionLabel>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
+                Lass uns sprechen.
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Wenn du das Gefühl hast, online mehr rausholen zu können — dann ist dieses Gespräch für
+                dich.
+              </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-6 space-y-4 hover:border-accent transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
-                <Mail className="h-6 w-6 text-accent" />
-              </div>
-              <h3 className="text-xl font-semibold">E-Mail</h3>
-              <p className="text-muted-foreground">fabianschuck13@gmail.com</p>
-              <Button variant="outline" className="w-full bg-transparent" asChild>
-                <a href="mailto:fabianschuck13@gmail.com">E-Mail schreiben</a>
-              </Button>
-            </Card>
+              <ul className="space-y-3 pt-2">
+                {bullets.map((bullet) => (
+                  <li key={bullet} className="flex gap-3 text-muted-foreground">
+                    <ArrowRight className="h-5 w-5 flex-shrink-0 mt-0.5 text-foreground" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
 
-            <Card className="p-6 space-y-4 hover:border-accent transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
-                <MessageSquare className="h-6 w-6 text-accent" />
-              </div>
-              <h3 className="text-xl font-semibold">Schnellanfrage</h3>
-              <p className="text-muted-foreground">Verfügbar für neue Projekte</p>
-              <Button variant="outline" className="w-full bg-transparent">
-                Termin vereinbaren
-              </Button>
-            </Card>
-          </div>
-
-          <Card className="p-8">
-            {isSubmitted && (
-              <div className="mb-6 p-4 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg">
-                <p className="text-green-800 dark:text-green-200 text-sm">
-                  ✓ Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.
+              <div className="pt-4 space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Kostenlos & unverbindlich · Antwort innerhalb von 24h
                 </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button variant="outline" asChild>
+                    <Link href="/#fragebogen">60-Sek-Check</Link>
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <a
+                      href={whatsappUrl(DEFAULT_WHATSAPP_MESSAGE)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      WhatsApp
+                    </a>
+                  </Button>
+                </div>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="inline-flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity"
+                >
+                  <Mail className="h-4 w-4" />
+                  {CONTACT_EMAIL}
+                </a>
               </div>
-            )}
-            {error && (
-              <div className="mb-6 p-4 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg">
-                <p className="text-red-800 dark:text-red-200 text-sm">{error}</p>
-              </div>
-            )}
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+            </div>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="rounded-xl border border-border bg-background/70 backdrop-blur-md p-6 sm:p-8 shadow-sm">
+              {isSubmitted && (
+                <div className="mb-6 p-4 bg-secondary border border-border rounded-lg">
+                  <p className="text-sm">
+                    Danke! Deine Nachricht ist angekommen. Ich melde mich in Kürze bei dir.
+                  </p>
+                </div>
+              )}
+              {error && (
+                <div className="mb-6 p-4 border border-destructive/30 rounded-lg">
+                  <p className="text-sm text-destructive">{error}</p>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
                     Name
@@ -134,29 +145,29 @@ export function Contact() {
                     disabled={isSubmitting}
                   />
                 </div>
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Nachricht
-                </label>
-                <Textarea
-                  id="message"
-                  placeholder="Erzähl mir von deinem Projekt..."
-                  rows={6}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  disabled={isSubmitting}
-                />
-              </div>
-              <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
-                {isSubmitting ? "Wird gesendet..." : "Nachricht senden"}
-                {!isSubmitting && (
-                  <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                )}
-              </Button>
-            </form>
-          </Card>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium">
+                    Worum geht es?
+                  </label>
+                  <Textarea
+                    id="message"
+                    placeholder="Erzähl mir kurz von deinem Projekt..."
+                    rows={5}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    required
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <Button type="submit" size="lg" className="w-full group" disabled={isSubmitting}>
+                  {isSubmitting ? "Wird gesendet..." : "Nachricht senden"}
+                  {!isSubmitting && (
+                    <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  )}
+                </Button>
+              </form>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

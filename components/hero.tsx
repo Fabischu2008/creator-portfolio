@@ -1,84 +1,60 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react"
-import { AnimatedBackground } from "@/components/animated-background"
+import { ArrowRight, ChevronDown } from "lucide-react"
+import { SectionLabel } from "@/components/section-label"
 
 export function Hero() {
-  const scrollToContact = () => {
-    const element = document.getElementById("contact")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 -z-10">
-        <AnimatedBackground />
-      </div>
-      
-      <div className="max-w-5xl w-full relative z-10">
-        <div className="space-y-8 text-center md:text-left">
-          <div className="space-y-4">
-            <h1
-              lang="de"
-              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-balance hyphens-auto break-words"
-            >
-              UX/UI Designer &<br />
-              Softwareentwickler
-            </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground max-w-3xl text-pretty">
-              Ich entwickle durchdachte digitale Erlebnisse, die Design und Code vereinen
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Button size="lg" onClick={scrollToContact} className="group">
-              Projekt starten
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => {
-                const element = document.getElementById("projects")
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" })
-                }
-              }}
-            >
-              Arbeiten ansehen
-            </Button>
-          </div>
-
-          <div className="flex gap-4 justify-center md:justify-start pt-8">
-            <a
-              href="https://github.com/Fabischu2008"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              <Github className="h-5 w-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/fabian-schuck-20a56122b/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a
-              href="mailto:fabianschuck13@gmail.com"
-              className="p-3 rounded-lg bg-secondary hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              <Mail className="h-5 w-5" />
-            </a>
-          </div>
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-24 pb-20"
+    >
+      <div className="max-w-4xl w-full text-center">
+        <div className="fade-in-up">
+          <SectionLabel>Websites · Marketing · Wachstum</SectionLabel>
         </div>
+
+        <h1
+          lang="de"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance hyphens-auto fade-in-up-delay-1"
+        >
+          Deine Website soll nicht gefallen.
+          <br />
+          <span className="text-muted-foreground">Sie soll verkaufen.</span>
+        </h1>
+
+        <p className="mt-8 text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed fade-in-up-delay-2">
+          Conversion-optimierte Websites und Landingpages — kombiniert mit Meta Ads, Social Media und
+          SEO, die dir die richtigen Kunden bringen.
+        </p>
+
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center fade-in-up-delay-3">
+          <Button size="lg" onClick={() => scrollTo("fragebogen")} className="group">
+            Kostenlosen 60-Sek-Check starten
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Button>
+          <Button size="lg" variant="outline" onClick={() => scrollTo("leistungen")}>
+            Leistungen ansehen
+          </Button>
+        </div>
+
+        <p className="mt-6 text-sm text-muted-foreground fade-in-up-delay-3">
+          4 Fragen · 60 Sekunden · kostenlos & unverbindlich
+        </p>
       </div>
+
+      <button
+        onClick={() => scrollTo("statement")}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-foreground transition-colors animate-bounce"
+        aria-label="Nach unten scrollen"
+      >
+        <ChevronDown className="h-6 w-6" />
+      </button>
     </section>
   )
 }

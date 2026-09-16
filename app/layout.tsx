@@ -4,14 +4,13 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
 
 export const metadata: Metadata = {
-  title: "Portfolio - UX/UI & Software Entwickler",
+  title: "Schuck Digital — Websites, Marketing & Wachstum",
   description:
-    "Professionelles Portfolio eines UX/UI Designers und Softwareentwicklers. Kreative digitale Lösungen für moderne Web-Erlebnisse.",
-  generator: "v0.app",
+    "Conversion-optimierte Websites, Landingpages, Meta Ads, Social Media und SEO. Mehr Kunden, mehr Umsatz — persönlich betreut von Fabian Schuck.",
   icons: {
     icon: [
       {
@@ -38,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className={`font-sans antialiased`}>
+      <body className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

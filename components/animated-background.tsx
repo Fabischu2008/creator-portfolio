@@ -10,37 +10,37 @@ interface Dot {
   radius: number
   targetVx: number
   targetVy: number
+  pulse: number
+  pulseSpeed: number
+}
+
+interface Orb {
+  x: number
+  y: number
+  radius: number
+  vx: number
+  vy: number
+  opacity: number
 }
 
 export function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [isDark, setIsDark] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const mouseRef = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
-    // Check for dark mode
-    const checkDarkMode = () => {
-      setIsDark(document.documentElement.classList.contains("dark"))
-    }
-    checkDarkMode()
-
-    // Check for mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
     checkMobile()
     window.addEventListener("resize", checkMobile)
 
-    // Watch for dark mode changes
-    const observer = new MutationObserver(checkDarkMode)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    })
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY }
+    }
+    window.addEventListener("mousemove", handleMouseMove)
 
     return () => {
-      observer.disconnect()
       window.removeEventListener("resize", checkMobile)
+      window.removeEventListener("mousemove", handleMouseMove)
     }
   }, [])
 
@@ -51,35 +51,31 @@ export function AnimatedBackground() {
     const ctx = canvas.getContext("2d", { alpha: true })
     if (!ctx) return
 
-    // Dot configuration - optimized for mobile
-    const dotCount = isMobile ? 25 : 50
-    const connectionDistance = isMobile ? 220 : 280
-    const minRadius = isMobile ? 2.5 : 3
-    const maxRadius = isMobile ? 5 : 7
-    const baseSpeed = 0.7
-    const speedVariation = 0.4
-    const directionChangeInterval = 180 // frames
-    const directionChangeRate = 0.05 // how fast direction changes
+    const dotCount = isMobile ? 30 : 55
+    const connectionDistance = isMobile ? 180 : 240
+    const minRadius = isMobile ? 1.5 : 2
+    const maxRadius = isMobile ? 3 : 4.5
+    const baseSpeed = 0.35
+    const speedVariation = 0.25
+    const directionChangeInterval = 200
+    const directionChangeRate = 0.04
 
     let dots: Dot[] = []
+    let orbs: Orb[] = []
     let animationFrameId: number
     let frameCount = 0
 
-    // Set canvas size for high DPI displays
     const resizeCanvas = () => {
       const dpr = window.devicePixelRatio || 1
       const rect = canvas.getBoundingClientRect()
-      
+
       canvas.width = rect.width * dpr
       canvas.height = rect.height * dpr
-      
       canvas.style.width = rect.width + "px"
       canvas.style.height = rect.height + "px"
-      
-      ctx.scale(dpr, dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
 
-    // Initialize dots with dynamic properties
     const initDots = () => {
       const rect = canvas.getBoundingClientRect()
       dots = []
@@ -89,60 +85,111 @@ export function AnimatedBackground() {
         const angle = Math.random() * Math.PI * 2
         const vx = Math.cos(angle) * speed
         const vy = Math.sin(angle) * speed
-        
+
         dots.push({
           x: Math.random() * rect.width,
           y: Math.random() * rect.height,
-          vx: vx,
-          vy: vy,
-          radius: radius,
+          vx,
+          vy,
+          radius,
           targetVx: vx,
           targetVy: vy,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: 0.02 + Math.random() * 0.02,
         })
       }
     }
 
-    // Initial setup
+    const initOrbs = () => {
+      const rect = canvas.getBoundingClientRect()
+      orbs = [
+        {
+          x: rect.width * 0.2,
+          y: rect.height * 0.3,
+          radius: isMobile ? 120 : 220,
+          vx: 0.15,
+          vy: 0.1,
+          opacity: 0.04,
+        },
+        {
+          x: rect.width * 0.75,
+          y: rect.height * 0.65,
+          radius: isMobile ? 100 : 180,
+          vx: -0.12,
+          vy: -0.08,
+          opacity: 0.03,
+        },
+      ]
+    }
+
     resizeCanvas()
     initDots()
+    initOrbs()
 
-    // Animation loop
     const animate = () => {
       const rect = canvas.getBoundingClientRect()
       const dpr = window.devicePixelRatio || 1
-      
       frameCount++
-      
+
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, rect.width, rect.height)
 
-      // Update dots with dynamic movement
-      dots.forEach((dot, index) => {
-        // Change direction periodically for more dynamic movement
+      // Floating gradient orbs
+      orbs.forEach((orb) => {
+        orb.x += orb.vx
+        orb.y += orb.vy
+
+        if (orb.x < -orb.radius) orb.x = rect.width + orb.radius
+        if (orb.x > rect.width + orb.radius) orb.x = -orb.radius
+        if (orb.y < -orb.radius) orb.y = rect.height + orb.radius
+        if (orb.y > rect.height + orb.radius) orb.y = -orb.radius
+
+        const gradient = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, orb.radius)
+        gradient.addColorStop(0, `rgba(0, 0, 0, ${orb.opacity})`)
+        gradient.addColorStop(1, "transparent")
+        ctx.fillStyle = gradient
+        ctx.beginPath()
+        ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2)
+        ctx.fill()
+      })
+
+      // Subtle mouse influence
+      const mouse = mouseRef.current
+      const mouseInfluence = isMobile ? 0 : 0.015
+
+      dots.forEach((dot) => {
         if (frameCount % directionChangeInterval === 0) {
           const angle = Math.random() * Math.PI * 2
           const speed = baseSpeed + (Math.random() - 0.5) * speedVariation
           dot.targetVx = Math.cos(angle) * speed
           dot.targetVy = Math.sin(angle) * speed
         }
-        
-        // Smoothly interpolate to target velocity
+
         dot.vx += (dot.targetVx - dot.vx) * directionChangeRate
         dot.vy += (dot.targetVy - dot.vy) * directionChangeRate
-        
-        // Update position
+
+        if (!isMobile && mouse.x > 0) {
+          const dx = mouse.x - dot.x
+          const dy = mouse.y - dot.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < 200 && dist > 0) {
+            dot.vx -= (dx / dist) * mouseInfluence
+            dot.vy -= (dy / dist) * mouseInfluence
+          }
+        }
+
         dot.x += dot.vx
         dot.y += dot.vy
+        dot.pulse += dot.pulseSpeed
 
-        // Wrap around edges
         if (dot.x < 0) dot.x = rect.width
         if (dot.x > rect.width) dot.x = 0
         if (dot.y < 0) dot.y = rect.height
         if (dot.y > rect.height) dot.y = 0
       })
 
-      // Draw connections
-      ctx.lineWidth = 2.5
+      // Connection lines
+      ctx.lineWidth = 1
 
       for (let i = 0; i < dots.length; i++) {
         for (let j = i + 1; j < dots.length; j++) {
@@ -151,11 +198,8 @@ export function AnimatedBackground() {
           const distance = Math.sqrt(dx * dx + dy * dy)
 
           if (distance < connectionDistance) {
-            const opacity = Math.pow(1 - distance / connectionDistance, 1.5)
-            const color = isDark
-              ? `rgba(148, 163, 184, ${opacity * 0.2})`
-              : `rgba(71, 85, 105, ${opacity * 0.25})`
-            ctx.strokeStyle = color
+            const opacity = Math.pow(1 - distance / connectionDistance, 2) * 0.12
+            ctx.strokeStyle = `rgba(0, 0, 0, ${opacity})`
             ctx.beginPath()
             ctx.moveTo(dots[i].x, dots[i].y)
             ctx.lineTo(dots[j].x, dots[j].y)
@@ -164,22 +208,14 @@ export function AnimatedBackground() {
         }
       }
 
-      // Draw dots with varying sizes
+      // Dots with pulse
       dots.forEach((dot) => {
-        // Glow effect
-        const gradient = ctx.createRadialGradient(dot.x, dot.y, 0, dot.x, dot.y, dot.radius * 2)
-        const dotColor = isDark ? "rgba(148, 163, 184, 0.3)" : "rgba(71, 85, 105, 0.35)"
-        gradient.addColorStop(0, dotColor)
-        gradient.addColorStop(1, "transparent")
-        ctx.fillStyle = gradient
+        const pulseScale = 1 + Math.sin(dot.pulse) * 0.15
+        const r = dot.radius * pulseScale
+
+        ctx.fillStyle = `rgba(0, 0, 0, ${0.15 + Math.sin(dot.pulse) * 0.05})`
         ctx.beginPath()
-        ctx.arc(dot.x, dot.y, dot.radius * 2, 0, Math.PI * 2)
-        ctx.fill()
-        
-        // Dot
-        ctx.fillStyle = isDark ? "rgba(148, 163, 184, 0.7)" : "rgba(71, 85, 105, 0.75)"
-        ctx.beginPath()
-        ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2)
+        ctx.arc(dot.x, dot.y, r, 0, Math.PI * 2)
         ctx.fill()
       })
 
@@ -188,26 +224,25 @@ export function AnimatedBackground() {
 
     animate()
 
-    // Handle resize
     const handleResize = () => {
       resizeCanvas()
       initDots()
+      initOrbs()
     }
     window.addEventListener("resize", handleResize)
 
     return () => {
       window.removeEventListener("resize", handleResize)
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId)
-      }
+      cancelAnimationFrame(animationFrameId)
     }
-  }, [isDark, isMobile])
+  }, [isMobile])
 
   return (
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
       style={{ background: "transparent" }}
+      aria-hidden="true"
     />
   )
 }
