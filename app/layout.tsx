@@ -10,7 +10,7 @@ const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono"
 export const metadata: Metadata = {
   title: "Schuck Digital — Websites, Marketing & Wachstum",
   description:
-    "Conversion-optimierte Websites, Landingpages, Meta Ads, Social Media und SEO. Mehr Kunden, mehr Umsatz — persönlich betreut von Fabian Schuck.",
+    "Conversion-optimierte Websites, Landingpages, Meta & Google Ads, Social Media und SEO. Mehr Kunden, mehr Umsatz — persönlich betreut von Fabian Schuck.",
   icons: {
     icon: [
       {

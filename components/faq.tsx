@@ -24,9 +24,9 @@ const faqs = [
       "Das hängt vom Umfang ab. Einfache Landingpages starten ab ca. 800 €, professionelle Websites ab ca. 1.500 €. Im kostenlosen Check klären wir deinen Bedarf und ich nenne dir einen realistischen Rahmen.",
   },
   {
-    question: "Betreust du auch Meta Ads und Social Media?",
+    question: "Betreust du auch Google Ads, Meta Ads und Social Media?",
     answer:
-      "Ja — Meta Ads (Facebook & Instagram), Social Media Betreuung und SEO gehören zu meinen Kernleistungen. Ich kann einzelne Bereiche übernehmen oder alles aus einer Hand.",
+      "Ja — Google Ads, Meta Ads (Facebook & Instagram), Social Media Betreuung und SEO gehören zu meinen Kernleistungen. Google holt Menschen ab, die schon suchen, Meta erreicht sie davor. Ich kann einzelne Bereiche übernehmen oder alles aus einer Hand.",
   },
   {
     question: "Wie schnell kann es losgehen?",

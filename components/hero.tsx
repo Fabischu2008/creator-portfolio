@@ -29,8 +29,8 @@ export function Hero() {
         </h1>
 
         <p className="mt-8 text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed fade-in-up-delay-2">
-          Conversion-optimierte Websites und Landingpages — kombiniert mit Meta Ads, Social Media und
-          SEO, die dir die richtigen Kunden bringen.
+          Conversion-optimierte Websites und Landingpages — kombiniert mit Meta & Google Ads, Social
+          Media und SEO, die dir die richtigen Kunden bringen.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center fade-in-up-delay-3">

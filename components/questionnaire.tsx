@@ -14,7 +14,7 @@ const STEPS = [
     options: [
       "Website",
       "Landingpage",
-      "Meta Ads",
+      "Meta & Google Ads",
       "Social Media Betreuung",
       "SEO",
       "Mehrere Leistungen",

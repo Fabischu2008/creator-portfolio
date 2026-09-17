@@ -67,22 +67,27 @@ export const services: Service[] = [
       "Starte den kostenlosen 60-Sekunden-Check und erfahre, wie deine neue Website aussehen kann.",
   },
   {
-    slug: "meta-ads",
+    slug: "meta-google-ads",
     icon: Megaphone,
-    title: "Meta Ads",
+    title: "Meta & Google Ads",
     shortDescription:
-      "Gezielte Werbekampagnen auf Facebook & Instagram für messbare Ergebnisse.",
+      "Bezahlte Werbung auf Facebook, Instagram und Google — für messbare Anfragen.",
     heroSubtitle: "Die richtigen Menschen. Zur richtigen Zeit. Mit der richtigen Botschaft.",
     intro:
-      "Meta Ads (Facebook & Instagram) sind eines der effektivsten Werkzeuge, um neue Kunden zu gewinnen — wenn sie richtig eingesetzt werden. Wir entwickeln Kampagnen, die deine Zielgruppe dort erreichen, wo sie täglich Zeit verbringt.",
-    whyTitle: "Warum Meta Ads dein Wachstum beschleunigen",
+      "Meta Ads (Facebook & Instagram) und Google Ads sind die beiden stärksten Hebel für schnelles Wachstum — sie funktionieren nur unterschiedlich. Google holt Menschen ab, die bereits nach deinem Angebot suchen. Meta zeigt dich Menschen, die dich noch gar nicht kennen. Ich setze beide Kanäle so auf, dass sie sich ergänzen statt sich das Budget wegzunehmen.",
+    whyTitle: "Warum bezahlte Werbung dein Wachstum beschleunigt",
     whyText:
-      "Organische Reichweite allein reicht selten aus, um schnell zu wachsen. Mit Meta Ads kannst du gezielt Menschen ansprechen, die nach deinem Angebot suchen — und das mit messbarem Budget. Jeder Euro wird trackbar.",
+      "Organische Reichweite allein reicht selten aus, um planbar zu wachsen. Mit Ads bestimmst du selbst, wie viele Menschen dich morgen sehen — und du siehst für jeden eingesetzten Euro, was er zurückbringt. Ob Google, Meta oder beides sinnvoll ist, hängt von deinem Angebot ab. Genau das klären wir vorher, statt einfach Budget zu verbrennen.",
     benefits: [
       {
-        title: "Präzise Zielgruppenansprache",
+        title: "Google: Nachfrage abgreifen",
         description:
-          "Erreiche genau die Menschen, die dein Produkt oder deine Dienstleistung brauchen — nach Alter, Interesse, Standort und Verhalten.",
+          "Wer bei Google nach deiner Leistung sucht, will kaufen. Mit Search Ads stehst du genau in diesem Moment ganz oben — noch vor der Konkurrenz.",
+      },
+      {
+        title: "Meta: Nachfrage erzeugen",
+        description:
+          "Auf Facebook und Instagram erreichst du Menschen, bevor sie überhaupt suchen — nach Alter, Interesse, Standort und Verhalten.",
       },
       {
         title: "Messbare ROI",
@@ -94,21 +99,17 @@ export const services: Service[] = [
         description:
           "Was funktioniert, skalieren wir. Was nicht funktioniert, optimieren wir — datenbasiert und kontinuierlich.",
       },
-      {
-        title: "Lead-Generierung on Autopilot",
-        description:
-          "Automatisierte Kampagnen, die rund um die Uhr qualifizierte Anfragen generieren.",
-      },
     ],
     process: [
-      "Zielgruppen-Analyse — wer sind deine idealen Kunden?",
+      "Kanal-Entscheidung — Google, Meta oder beides?",
+      "Zielgruppen- & Keyword-Analyse — wer sucht wonach?",
       "Kampagnen-Setup — Anzeigen, Creatives, Tracking",
       "Testing & Optimierung — A/B-Tests für maximale Performance",
       "Reporting — monatliche Auswertung und Strategie-Anpassung",
     ],
-    ctaTitle: "Mehr Kunden über Facebook & Instagram?",
+    ctaTitle: "Mehr Kunden über Google, Facebook & Instagram?",
     ctaText:
-      "Im 60-Sekunden-Check klären wir, ob Meta Ads für dein Business Sinn machen — kostenlos und unverbindlich.",
+      "Im 60-Sekunden-Check klären wir, welcher Kanal für dein Business Sinn macht — kostenlos und unverbindlich.",
   },
   {
     slug: "social-media",
