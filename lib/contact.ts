@@ -1,6 +1,6 @@
 // International format without "+" or spaces — required by wa.me links.
 export const WHATSAPP_NUMBER = "4915259527957"
-export const CONTACT_EMAIL = "fabianschuck13@gmail.com"
+export const CONTACT_EMAIL = "info@schuck.digital"
 
 export function whatsappUrl(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`

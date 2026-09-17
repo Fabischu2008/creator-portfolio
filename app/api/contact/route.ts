@@ -5,7 +5,9 @@ import { CONTACT_EMAIL } from "@/lib/contact"
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 const TO_EMAIL = process.env.CONTACT_TO_EMAIL || CONTACT_EMAIL
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "Schuck Digital <onboarding@resend.dev>"
+// Eigene Absenderadresse statt der Kontaktadresse, damit Lead-Mails im Postfach
+// sofort als Formular-Benachrichtigung erkennbar sind.
+const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "Schuck Digital <website@schuck.digital>"
 
 /** Shown to the visitor whenever the mail could not be handed over to Resend. */
 const DELIVERY_ERROR =
