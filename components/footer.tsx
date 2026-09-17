@@ -111,10 +111,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-8 border-t border-border">
-          <p className="text-sm text-muted-foreground text-center">
+        <div className="mt-14 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
             © {currentYear} Schuck Digital. Alle Rechte vorbehalten.
           </p>
+          <ul className="flex items-center gap-6 text-sm text-muted-foreground">
+            <li>
+              <Link href="/impressum" className="hover:text-foreground transition-colors">
+                Impressum
+              </Link>
+            </li>
+            <li>
+              <Link href="/datenschutz" className="hover:text-foreground transition-colors">
+                Datenschutz
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

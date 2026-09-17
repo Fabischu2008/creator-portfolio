@@ -11,6 +11,10 @@ export interface Service {
   icon: LucideIcon
   title: string
   shortDescription: string
+  /** Suchmaschinen-Titel: enthält die Begriffe, nach denen tatsächlich gesucht wird. */
+  seoTitle: string
+  /** Meta-Description, ausgelegt auf die ~155 Zeichen, die Google anzeigt. */
+  seoDescription: string
   heroSubtitle: string
   intro: string
   whyTitle: string
@@ -28,6 +32,9 @@ export const services: Service[] = [
     title: "Websites & Landingpages",
     shortDescription:
       "Conversion-optimierte Seiten, die Besucher in Anfragen verwandeln.",
+    seoTitle: "Website erstellen lassen",
+    seoDescription:
+      "Professionelle Websites und Landingpages, die aus Besuchern Anfragen machen. Schnell, für Handys optimiert und auf Conversion ausgelegt — persönlich betreut.",
     heroSubtitle: "Deine Website ist dein bester Verkäufer — 24/7.",
     intro:
       "Eine Website ist mehr als eine digitale Visitenkarte. Sie ist der Ort, an dem Interesse zu Vertrauen und Vertrauen zu Umsatz wird. Wir bauen Websites und Landingpages, die genau das tun: klar kommunizieren, Vertrauen aufbauen und Besucher zu Kunden machen.",
@@ -72,6 +79,9 @@ export const services: Service[] = [
     title: "Meta & Google Ads",
     shortDescription:
       "Bezahlte Werbung auf Facebook, Instagram und Google — für messbare Anfragen.",
+    seoTitle: "Meta & Google Ads Betreuung",
+    seoDescription:
+      "Werbung auf Google, Facebook und Instagram, die messbare Anfragen bringt statt Budget zu verbrennen. Kampagnen-Aufbau, laufende Betreuung und Auswertung aus einer Hand.",
     heroSubtitle: "Die richtigen Menschen. Zur richtigen Zeit. Mit der richtigen Botschaft.",
     intro:
       "Meta Ads (Facebook & Instagram) und Google Ads sind die beiden stärksten Hebel für schnelles Wachstum — sie funktionieren nur unterschiedlich. Google holt Menschen ab, die bereits nach deinem Angebot suchen. Meta zeigt dich Menschen, die dich noch gar nicht kennen. Ich setze beide Kanäle so auf, dass sie sich ergänzen statt sich das Budget wegzunehmen.",
@@ -117,6 +127,9 @@ export const services: Service[] = [
     title: "Social Media Betreuung",
     shortDescription:
       "Professioneller Auftritt, Content-Strategie und Community-Management.",
+    seoTitle: "Social Media Betreuung für Unternehmen",
+    seoDescription:
+      "Professioneller Auftritt auf Instagram und Facebook: Content-Strategie, Redaktionsplan und Community-Management. Sichtbar bleiben, ohne täglich selbst posten zu müssen.",
     heroSubtitle: "Sichtbar sein, wo deine Kunden sind.",
     intro:
       "Social Media ist längst kein Spielzeug mehr — es ist ein zentraler Kanal für Markenaufbau, Kundenbindung und Vertrauen. Wir übernehmen deinen professionellen Auftritt auf allen relevanten Plattformen, damit du dich auf dein Business konzentrieren kannst.",
@@ -161,6 +174,9 @@ export const services: Service[] = [
     title: "SEO",
     shortDescription:
       "Search Engine Optimization — damit dich deine Kunden finden, bevor sie zur Konkurrenz gehen.",
+    seoTitle: "SEO Optimierung für mehr Sichtbarkeit",
+    seoDescription:
+      "Bei Google gefunden werden, wenn deine Kunden suchen. Technisches SEO, passende Inhalte und lokale Sichtbarkeit — nachhaltig aufgebaut statt teuer eingekauft.",
     heroSubtitle: "Gefunden werden, wenn es zählt.",
     intro:
       "SEO (Search Engine Optimization) sorgt dafür, dass deine Website bei Google sichtbar ist — genau dann, wenn potenzielle Kunden nach deinen Leistungen suchen. Keine Werbekosten pro Klick. Nachhaltige Sichtbarkeit, die langfristig Kunden bringt.",
@@ -205,6 +221,9 @@ export const services: Service[] = [
     title: "Kundengewinnung & Umsatz",
     shortDescription:
       "Ganzheitliche Marketing-Strategien für mehr Anfragen und nachhaltiges Wachstum.",
+    seoTitle: "Kundengewinnung & Umsatzsteigerung",
+    seoDescription:
+      "Systematisch mehr Anfragen statt Zufallstreffer: klare Strategie, die passenden Kanäle und messbare Ergebnisse für planbares Wachstum deines Unternehmens.",
     heroSubtitle: "Systematisch wachsen — nicht zufällig.",
     intro:
       "Kundengewinnung ist kein Zufall, sondern System. Wir verbinden Website, Ads, Social Media und SEO zu einer durchdachten Strategie, die dir kontinuierlich neue Kunden bringt und deinen Umsatz steigert.",
@@ -249,6 +268,9 @@ export const services: Service[] = [
     title: "Digitale Präsenz",
     shortDescription:
       "Vom ersten Eindruck bis zum Abschluss — dein Unternehmen online überzeugen.",
+    seoTitle: "Digitale Präsenz aufbauen",
+    seoDescription:
+      "Vom ersten Eindruck bis zum Abschluss überzeugen: Website, Profile und Inhalte, die zusammenpassen, Vertrauen schaffen und dein Unternehmen online sichtbar machen.",
     heroSubtitle: "Online präsent sein, wo es zählt.",
     intro:
       "Deine digitale Präsenz ist das Gesamtbild, das potenzielle Kunden von dir bekommen — Website, Social Media, Google-Einträge, Bewertungen. Wir sorgen dafür, dass dieses Bild professionell, konsistent und überzeugend ist.",

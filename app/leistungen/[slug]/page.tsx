@@ -20,9 +20,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const service = getServiceBySlug(slug)
   if (!service) return { title: "Leistung nicht gefunden" }
 
+  const title = `${service.seoTitle} | Schuck Digital`
+  const url = `/leistungen/${service.slug}`
+
   return {
-    title: `${service.title} — Schuck Digital`,
-    description: service.shortDescription,
+    title,
+    description: service.seoDescription,
+    // Verhindert, dass Google die Seite unter mehreren Adressen doppelt wertet.
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description: service.seoDescription,
+      url,
+      siteName: "Schuck Digital",
+      locale: "de_DE",
+      type: "website",
+    },
   }
 }
 
