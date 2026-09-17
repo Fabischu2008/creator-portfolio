@@ -15,7 +15,7 @@ interface ContactActionsProps {
 
 export function ContactActions({
   whatsappMessage = DEFAULT_WHATSAPP_MESSAGE,
-  mailSubject = "Anfrage über schuck-digital.de",
+  mailSubject = "Anfrage über schuck.digital",
   className = "",
 }: ContactActionsProps) {
   return (

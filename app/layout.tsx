@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Schuck Digital — Websites, Marketing & Wachstum",
   description:
     "Conversion-optimierte Websites, Landingpages, Meta & Google Ads, Social Media und SEO. Mehr Kunden, mehr Umsatz — persönlich betreut von Fabian Schuck.",
+  verification: {
+    google: "HoQC-517IlT51TUErMJPqcs57gmdgQwJ5aoIVemb9qc",
+  },
   icons: {
     icon: [
       {
