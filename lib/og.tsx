@@ -45,22 +45,22 @@ export async function createOgImage({ title, subtitle, label = "Schuck Digital" 
         }}
       />
 
-      {/* Weiches Licht von links, damit der Text nicht flach wirkt. */}
+      {/* Weiches Licht hinter dem zentrierten Text. */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           display: "flex",
           background:
-            "radial-gradient(ellipse 70% 80% at 18% 45%, rgba(255,255,255,0.08) 0%, transparent 62%)",
+            "radial-gradient(ellipse 60% 70% at 50% 48%, rgba(255,255,255,0.08) 0%, transparent 62%)",
         }}
       />
 
-      {/* Dekorative Kugel rechts — schlichtes Schwarzweiß, analog zur Scroll-Animation. */}
+      {/* Ringe bleiben als Dekor, sitzen aber hinter dem Text. */}
       <div
         style={{
           position: "absolute",
-          right: -80,
+          left: 340,
           top: 55,
           width: 520,
           height: 520,
@@ -78,7 +78,7 @@ export async function createOgImage({ title, subtitle, label = "Schuck Digital" 
               height: diameter,
               display: "flex",
               borderRadius: 999,
-              border: `1px solid rgba(255,255,255,${diameter === 200 ? 0.34 : diameter === 360 ? 0.22 : 0.14})`,
+              border: `1px solid rgba(255,255,255,${diameter === 200 ? 0.28 : diameter === 360 ? 0.18 : 0.12})`,
             }}
           />
         ))}
@@ -89,15 +89,18 @@ export async function createOgImage({ title, subtitle, label = "Schuck Digital" 
           position: "relative",
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
           justifyContent: "space-between",
-          padding: "64px 72px",
-          width: 780,
+          padding: "64px 80px",
+          width: "100%",
           height: "100%",
+          textAlign: "center",
         }}
       >
         <div
           style={{
             display: "flex",
+            justifyContent: "center",
             fontSize: 22,
             letterSpacing: "0.28em",
             textTransform: "uppercase",
@@ -108,14 +111,25 @@ export async function createOgImage({ title, subtitle, label = "Schuck Digital" 
           {label}
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 28,
+            width: "100%",
+          }}
+        >
           <div
             style={{
               display: "flex",
+              justifyContent: "center",
               fontSize: title.length > 28 ? 64 : 76,
               lineHeight: 1.05,
               fontWeight: 700,
               letterSpacing: "-0.04em",
+              textAlign: "center",
+              maxWidth: 920,
             }}
           >
             {title}
@@ -123,11 +137,13 @@ export async function createOgImage({ title, subtitle, label = "Schuck Digital" 
           <div
             style={{
               display: "flex",
+              justifyContent: "center",
               fontSize: 28,
               lineHeight: 1.35,
               color: "rgba(255,255,255,0.68)",
               fontWeight: 400,
-              maxWidth: 680,
+              textAlign: "center",
+              maxWidth: 760,
             }}
           >
             {subtitle}
@@ -138,6 +154,7 @@ export async function createOgImage({ title, subtitle, label = "Schuck Digital" 
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             gap: 16,
             fontSize: 22,
             color: "rgba(255,255,255,0.5)",
