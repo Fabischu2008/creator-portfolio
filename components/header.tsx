@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react"
 import { services } from "@/lib/services"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const NAV_ITEMS = [
   { id: "about", label: "Über mich" },
@@ -139,19 +140,24 @@ export function Header() {
               </button>
             ))}
 
+            <ThemeToggle />
+
             <Button size="lg" className="font-semibold group" onClick={() => navigate("fragebogen")}>
               60-Sek-Check
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </nav>
 
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2"
-            aria-label={isMobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2"
+              aria-label={isMobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {isMobileMenuOpen && (

@@ -41,8 +41,18 @@ export function ScrollAnimatedBackground() {
   const scrollRef = useRef(0)
   const rotationRef = useRef(0)
   const mouseRef = useRef({ x: -1, y: -1 })
+  const inkRef = useRef("0, 0, 0")
 
   useEffect(() => {
+    const syncInk = () => {
+      inkRef.current = document.documentElement.classList.contains("dark")
+        ? "255, 255, 255"
+        : "0, 0, 0"
+    }
+    syncInk()
+    const observer = new MutationObserver(syncInk)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+
     const onScroll = () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight
       scrollRef.current = docHeight > 0 ? window.scrollY / docHeight : 0
@@ -55,6 +65,7 @@ export function ScrollAnimatedBackground() {
     window.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("mousemove", onMouseMove, { passive: true })
     return () => {
+      observer.disconnect()
       window.removeEventListener("scroll", onScroll)
       window.removeEventListener("mousemove", onMouseMove)
     }
@@ -288,7 +299,7 @@ export function ScrollAnimatedBackground() {
               const distance = Math.sqrt(distSq)
               const opacity = Math.pow(1 - distance / networkDistance, 1.4) * networkAlpha
               if (opacity > 0.005) {
-                ctx.strokeStyle = `rgba(0, 0, 0, ${opacity})`
+                ctx.strokeStyle = `rgba(${inkRef.current}, ${opacity})`
                 ctx.beginPath()
                 ctx.moveTo(vertices[i].x, vertices[i].y)
                 ctx.lineTo(vertices[j].x, vertices[j].y)
@@ -310,7 +321,7 @@ export function ScrollAnimatedBackground() {
           let opacity = meshAlpha * (0.07 + avgDepth * 0.34)
           if (isSeam) opacity *= 1 - gridT
           if (opacity > 0.005) {
-            ctx.strokeStyle = `rgba(0, 0, 0, ${opacity})`
+            ctx.strokeStyle = `rgba(${inkRef.current}, ${opacity})`
             ctx.lineWidth = 0.7 + avgDepth * 0.8
             ctx.beginPath()
             ctx.moveTo(va.x, va.y)
@@ -327,7 +338,7 @@ export function ScrollAnimatedBackground() {
           if (ringT > 0) {
             const ringRadius = sphereRadius + ringT * burstDistance * 0.8 + ring * 45
             const ringAlpha = (1 - ringT) * (1 - gridT) * 0.12
-            ctx.strokeStyle = `rgba(0, 0, 0, ${ringAlpha})`
+            ctx.strokeStyle = `rgba(${inkRef.current}, ${ringAlpha})`
             ctx.lineWidth = 2 - ring * 0.5
             ctx.beginPath()
             ctx.arc(centerX, centerY, ringRadius, 0, Math.PI * 2)
@@ -348,7 +359,7 @@ export function ScrollAnimatedBackground() {
         const alpha = lerp(heroAlpha, meshDotAlpha, convergeT) * meshVisibility
 
         if (alpha > 0.005) {
-          ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`
+          ctx.fillStyle = `rgba(${inkRef.current}, ${alpha})`
           ctx.beginPath()
           ctx.arc(v.x, v.y, Math.max(r, 0.4), 0, Math.PI * 2)
           ctx.fill()
