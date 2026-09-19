@@ -24,6 +24,14 @@ export const metadata: Metadata = {
     siteName: "Schuck Digital",
     locale: "de_DE",
     type: "website",
+    images: [
+      {
+        url: "/og-square.png",
+        width: 1024,
+        height: 1024,
+        alt: "Schuck Digital — Mehr Kunden. Mehr Umsatz.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
