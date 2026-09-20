@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { ImageIcon } from "lucide-react"
 import { SectionLabel } from "@/components/section-label"
 import { Reveal } from "@/components/reveal"
 import { MediaCarousel } from "@/components/media-carousel"
@@ -87,11 +86,6 @@ const projects: Project[] = [
   },
 ]
 
-const upcoming = [
-  { title: "Meta Ads Kampagnen", description: "Kampagnen-Ergebnisse folgen" },
-  { title: "Landingpage Conversions", description: "Conversion-Daten folgen" },
-]
-
 export function Proof() {
   const adSlides = adResults.map((result) => (
     <figure
@@ -168,22 +162,6 @@ export function Proof() {
             <MediaCarousel slides={projectSlides} ariaLabel="Website-Projekte" />
           </div>
         </Reveal>
-
-        <div className="mt-20 grid sm:grid-cols-2 gap-4">
-          {upcoming.map((item, index) => (
-            <Reveal key={item.title} delay={index * 70}>
-              <div className="h-full rounded-xl border border-dashed border-border bg-background/40 backdrop-blur-sm flex flex-col items-center justify-center gap-3 p-8 text-center">
-                <div className="h-12 w-12 rounded-lg bg-secondary flex items-center justify-center">
-                  <ImageIcon className="h-6 w-6 text-muted-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   )
