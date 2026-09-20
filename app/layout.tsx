@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { SITE_URL } from "@/lib/site"
 import { buildBusinessSchema } from "@/lib/structured-data"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -66,6 +67,7 @@ export default function RootLayout({
           />
           {children}
           <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

@@ -73,11 +73,12 @@ export default function DatenschutzPage() {
 
       <LegalSection title="Reichweitenmessung mit Vercel Web Analytics">
         <p>
-          Zur Auswertung der Seitennutzung kommt Vercel Web Analytics zum Einsatz, ein Dienst der
-          Vercel Inc. Das Skript wird über die eigene Domain ausgeliefert. Es setzt{" "}
-          <strong>keine Cookies</strong>, vergibt keine geräteübergreifende Kennung und erstellt kein
-          Profil einzelner Besucher. Erfasst werden aggregierte Angaben wie aufgerufene Seiten,
-          ungefähre Herkunftsregion, Gerätetyp und die verweisende Seite.
+          Zur Auswertung der Seitennutzung kommen Vercel Web Analytics und Vercel Speed Insights zum
+          Einsatz, Dienste der Vercel Inc. Die Skripte werden über die eigene Domain ausgeliefert. Sie
+          setzen <strong>keine Cookies</strong>, vergeben keine geräteübergreifende Kennung und
+          erstellen kein Profil einzelner Besucher. Erfasst werden aggregierte Angaben wie
+          aufgerufene Seiten, ungefähre Herkunftsregion, Gerätetyp, die verweisende Seite sowie
+          technische Leistungskennzahlen (etwa Ladezeiten).
         </p>
         <p>
           Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt darin,
