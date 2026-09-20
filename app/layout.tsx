@@ -59,6 +59,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" suppressHydrationWarning>
+      <head>
+        <script async src="https://px.get-ryze.ai/px.js" data-key="rz_pk_2ca2040fdae5b1bf0927c72c5587004d"></script>
+      </head>
       <body className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <script
