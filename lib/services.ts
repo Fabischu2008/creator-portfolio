@@ -23,6 +23,14 @@ export interface Service {
   process: string[]
   ctaTitle: string
   ctaText: string
+  /** Querverweis auf ein bezahltes Einstiegsangebot, z. B. den Google Ads Audit. */
+  relatedOffer?: {
+    href: string
+    label: string
+    title: string
+    text: string
+    cta: string
+  }
 }
 
 export const services: Service[] = [
@@ -120,6 +128,13 @@ export const services: Service[] = [
     ctaTitle: "Mehr Kunden über Google, Facebook & Instagram?",
     ctaText:
       "Im 60-Sekunden-Check klären wir, welcher Kanal für dein Business Sinn macht — kostenlos und unverbindlich.",
+    relatedOffer: {
+      href: "/google-ads-audit",
+      label: "Schon am Laufen",
+      title: "Google Ads Audit für 249 €",
+      text: "Dein Konto läuft, aber du weißt nicht, wo Budget versickert? In 5 Werktagen bekommst du einen klaren Bericht — ohne Betreuungszwang.",
+      cta: "Audit anfragen",
+    },
   },
   {
     slug: "social-media",

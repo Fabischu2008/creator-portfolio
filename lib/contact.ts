@@ -15,6 +15,9 @@ export function mailtoUrl(subject: string, body?: string) {
 export const DEFAULT_WHATSAPP_MESSAGE =
   "Hallo Fabian! Ich habe deine Website gesehen und würde gerne über mein Projekt sprechen."
 
+export const GOOGLE_ADS_AUDIT_WHATSAPP_MESSAGE =
+  "Hallo Fabian! Ich möchte den Google Ads Audit für 249 € anfragen."
+
 export function serviceWhatsappMessage(serviceTitle: string) {
   return `Hallo Fabian! Ich habe deine Seite zu "${serviceTitle}" gelesen und würde das gerne für mein Business besprechen.`
 }

@@ -109,6 +109,31 @@ export function ServicePageContent({ service }: ServicePageContentProps) {
         </div>
       </section>
 
+      {service.relatedOffer && (
+        <section className="px-4 sm:px-6 lg:px-8 pt-20">
+          <div className="max-w-4xl mx-auto">
+            <Reveal>
+              <Link
+                href={service.relatedOffer.href}
+                className="group flex flex-col gap-4 rounded-xl border border-border bg-background/60 backdrop-blur-sm p-6 transition-all hover:border-foreground sm:flex-row sm:items-center"
+              >
+                <div className="min-w-0 flex-1 space-y-2">
+                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                    {service.relatedOffer.label}
+                  </p>
+                  <h2 className="text-xl font-semibold tracking-tight">{service.relatedOffer.title}</h2>
+                  <p className="leading-relaxed text-muted-foreground">{service.relatedOffer.text}</p>
+                </div>
+                <span className="inline-flex items-center text-sm font-medium">
+                  {service.relatedOffer.cta}
+                  <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
       <ServiceCta
         title={service.ctaTitle}
         text={service.ctaText}

@@ -51,6 +51,17 @@ export async function POST(request: NextRequest) {
     }
 
     const isQuestionnaire = type === "questionnaire"
+    const isAudit = type === "google-ads-audit"
+    const heading = isQuestionnaire
+      ? "Neuer 60-Sekunden-Check"
+      : isAudit
+        ? "Neue Google-Ads-Audit-Anfrage"
+        : "Neue Kontaktanfrage"
+    const subject = isQuestionnaire
+      ? `Neuer 60-Sek-Check: ${name}`
+      : isAudit
+        ? `Google Ads Audit: ${name}`
+        : `Neue Kontaktanfrage: ${name}`
 
     // Server log doubles as a backup copy of the lead if the mail bounces later.
     console.log("[lead]", JSON.stringify({ type, name, email, service, goal, timeline, budget }))
@@ -71,7 +82,7 @@ export async function POST(request: NextRequest) {
 
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #333;">${isQuestionnaire ? "Neuer 60-Sekunden-Check" : "Neue Kontaktanfrage"}</h2>
+        <h2 style="color: #333;">${heading}</h2>
         <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <p><strong>Name:</strong> ${escapeHtml(name)}</p>
           <p><strong>E-Mail:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
@@ -94,7 +105,7 @@ export async function POST(request: NextRequest) {
     `
 
     const text = [
-      isQuestionnaire ? "Neuer 60-Sekunden-Check" : "Neue Kontaktanfrage",
+      heading,
       "",
       `Name: ${name}`,
       `E-Mail: ${email}`,
@@ -108,7 +119,7 @@ export async function POST(request: NextRequest) {
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: String(email),
-      subject: isQuestionnaire ? `Neuer 60-Sek-Check: ${name}` : `Neue Kontaktanfrage: ${name}`,
+      subject,
       html,
       text,
     })
