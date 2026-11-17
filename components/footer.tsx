@@ -38,6 +38,11 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/google-ads-audit" className="hover:text-foreground transition-colors">
+                  Google Ads Audit · 249 €
+                </Link>
+              </li>
             </ul>
           </div>
 
